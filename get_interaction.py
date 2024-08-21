@@ -458,6 +458,7 @@ class Interaction:
                 for i in range(self.len_B)
                 if interactions[i] > 0
             ]
+            token_res_id = self.token_res_ids[self.len_A :]
         elif chain_id == "B":
             chain_B_index = self.token_res_ids.index(res_id)
             interactions = self.contact_probs[self.len_A + chain_B_index][: self.len_A]
@@ -466,6 +467,7 @@ class Interaction:
                 for i in range(self.len_A)
                 if interactions[i] > 0
             ]
+            token_res_id = self.token_res_ids[: self.len_A]
         else:
             print("Invalid chain id. Please use 'A' or 'B'.")
             return
@@ -485,9 +487,7 @@ class Interaction:
                         "b_factor": combined_results[inter_residue]["Average B-factor"],
                         "PAE": combined_results[inter_residue]["Average PAE value"],
                         "contact_probability": str(
-                            interactions[
-                                self.token_res_ids.index(int(inter_residue[1:]))
-                            ]
+                            interactions[token_res_id.index(int(inter_residue[1:]))]
                         ),
                     }
                 )
@@ -502,10 +502,10 @@ class Interaction:
 
 
 ################### test ###################
-# interaction = Interaction(
-#     r"./uploads/fold_2024_07_15_16_51_full_data_0.json",
-#     r"./uploads/fold_2024_07_15_16_51_model_0.pdb",
-# )
+interaction = Interaction(
+    r"./test/fold_2024_08_21_22_02_full_data_0.json",
+    r"./test/fold_2024_08_21_22_02_model_0.pdb",
+)
 # interaction.plot_interaction_summary("B")
 # interaction.interaction_map()
-# interaction.query_interactions("A", 296)
+# interaction.query_interactions("B", 66)
