@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualization</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='function3.css') }}">
+</head>
+
+<body>
+    <div class="sidebar">
+        <p>Sidebar content</p>
+    </div>
+    <div class="main-content">
+        <h1>Alpha Find</h1>
+        <div class="container">
+            <div class="back-box">
+                <a href="/" class="button">Return to upload page</a>
+                <a href="/?action=showMessage" class="button">Return to analysis page</a>
+            </div>
+            <form method="post" action="/generate_images">
+                <div id="chooseChain" class="instruction">
+                    The interaction number and total contact probability at different sites of your chosen chain will be
+                    showed below.<br>
+                    Choose the chain you need to mutate:
+                </div>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="chain" value="chainA" onclick="updateContent();">
+                        chain A
+                    </label>
+                    <label>
+                        <input type="radio" name="chain" value="chainB" onclick="updateContent();">
+                        chain B
+                    </label>
+                </div>
+            </form>
+            <button id="confirmButton" class="button">Confirm</button>
+        </div>
+
+        <div id="imageContainer" class="imageContainer">
+            <h2 id="resultTitle">Bubble map for all interactions & chain interaction count</h2>
+            <div id="images" class="imageScroll">
+                <img id="bubbleMap" class="hidden" src="" alt="Bubble Map">
+                <img id="summary" class="hidden" src="" alt="Interaction Summary">
+            </div>
+            <button id="downloadBubbleMap" class="button hidden">Download Bubble Map</button>
+            <button id="downloadSummary" class="button hidden">Download Summary</button>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('confirmButton').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the form from submitting via the browser
+            const selectedChainInput = document.querySelector('input[name="chain"]:checked');
+
+            if (!selectedChainInput) {
+                alert("Please select a chain before confirming.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('chain', selectedChainInput.value);
+
+            fetch('/generate_images', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to process request: ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        document.getElementById('bubbleMap').src = "/images/bubble_map.png?time=" + new Date().getTime();
+                        document.getElementById('summary').src = "/images/interaction_summary.png?time=" + new Date().getTime();
+
+                        document.getElementById('bubbleMap').classList.remove('hidden');
+                        document.getElementById('summary').classList.remove('hidden');
+                        document.getElementById('downloadBubbleMap').classList.remove('hidden');
+                        document.getElementById('downloadSummary').classList.remove('hidden');
+
+                        // download the images
+                        document.getElementById('downloadBubbleMap').onclick = function () {
+                            window.location.href = '/download-image/bubble_map.png';
+                        };
+                        document.getElementById('downloadSummary').onclick = function () {
+                            window.location.href = '/download-image/interaction_summary.png';
+                        };
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error sending request: ' + error.message);
+                });
+        });
+    </script>

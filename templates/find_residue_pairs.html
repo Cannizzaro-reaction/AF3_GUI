@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Residue Pair Range</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='function1.css') }}">
+</head>
+
+<body>
+    <div class="sidebar">
+        <p>Sidebar content</p>
+    </div>
+    <div class="main-content">
+        <h1>Alpha Find</h1>
+        <div class="container">
+            <div class="back-box">
+                <a href="/" class="button">Return to upload page</a>
+                <a href="/?action=showMessage" class="button">Return to analysis page</a>
+            </div>
+            <div id="instructionFindPair" class="instruction">
+                Find the first n residue pairs with the highest contact probability.
+            </div>
+            <label for="rangeSlider" class="instruction">Choose a number between 3 and 20:</label>
+            <p>Selected value: <span id="rangeValue">10</span></p>
+            <input type="range" id="rangeSlider" name="rangeSlider" min="3" max="20" value="10">
+            <button id="confirmButton" class="button">Confirm</button>
+        </div>
+
+        <div id="resultContainer" class="formContainer">
+            <h2>Top Residue Pairs</h2>
+            <div id="resultTable"></div> <!-- Container to display the table -->
+            <button id="downloadButton" style="display:none;" class="button">Save as CSV</button> <!--download button-->
+            <button id="fullDownloadButton" style="display:none;" class="button">Save full data</button>
+            <!--download button 2-->
+        </div>
+
+    </div>
+
+    <script>
+        const slider = document.getElementById('rangeSlider');
+        const output = document.getElementById('rangeValue');
+        output.textContent = slider.value;
+
+        slider.oninput = function () {
+            output.textContent = this.value;
+        }
+
+        document.getElementById('confirmButton').addEventListener('click', function () {
+            // alert('confirmed');
+
+            const n = parseInt(document.getElementById('rangeValue').textContent);
+            console.log("Selected n value:", n);
+
+            fetch(`/generate_csv?n=${n}`, {
+                method: 'POST'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Received data:", data);
+                    const tableContainer = document.getElementById('resultTable');
+                    tableContainer.innerHTML = generateTableHTML(data.data);
+                    bindRowClickEvents();
+
+                    // 显示下载按钮
+                    const downloadButton = document.getElementById('downloadButton');
+                    downloadButton.style.display = 'block'; // 显示按钮
+                    downloadButton.onclick = function () {
+                        window.location.href = `/download-csv/${data.csvPath}`; // 设置按钮的点击行为
+                    };
+
+                    const fullDownloadButton = document.getElementById('fullDownloadButton');
+                    fullDownloadButton.style.display = 'block'; // 显示按钮
+                    fullDownloadButton.onclick = function () {
+                        window.location.href = `/download-csv/${data.fullPath}`; // 设置按钮的点击行为
+                    };
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+        });
+
+        function generateTableHTML(data) {
+            let tableHTML = '<table border="1"><tr>';
+            const columnOrder = ["#", "Contact_Prob", "Chain_1", "Residue_1", "Residue_1_Name", "Chain_2", "Residue_2", "Residue_2_Name", "PAE", "Average_PAE_1", "Average_PAE_2", "Average_B_factor_1", "Average_B_factor_2"];
+
+            // header
+            columnOrder.forEach(header => {
+                tableHTML += `<th>${header}</th>`;
+            });
+            tableHTML += '</tr>';
+
+            // data
+            data.forEach((row, index) => {
+                tableHTML += '<tr>';
+                tableHTML += `<th>${index + 1}</th>`;
+                columnOrder.slice(1).forEach(key => {
+                    tableHTML += `<td>${row[key]}</td>`;
+                });
+                tableHTML += '</tr>';
+            });
+
+            tableHTML += '</table>';
+            return tableHTML;
+        }
+
+        function bindRowClickEvents() {
+            document.querySelectorAll('table tbody tr').forEach(row => {
+                row.addEventListener('click', function () {
+                    // alert('Row clicked!');
+                    document.querySelectorAll('table tbody tr').forEach(row => {
+                        row.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                });
+            });
+        }
+    </script>
+
+</body>
+
+</html>
