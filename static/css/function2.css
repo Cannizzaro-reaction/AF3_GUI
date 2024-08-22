@@ -78,6 +78,7 @@ h1 {
     margin: 0;
     align-items: center;
     justify-content: center;
+    margin-bottom: 5px;
 }
 
 .button:hover {

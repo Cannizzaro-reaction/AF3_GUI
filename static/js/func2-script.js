@@ -32,11 +32,17 @@ document.getElementById('confirmButton').addEventListener('click', function () {
             tableContainer.innerHTML = generateTableHTML(data.data);
             bindRowClickEvents();
 
-            // 显示下载按钮
+            // show download buttons
             const downloadButton = document.getElementById('downloadButton');
-            downloadButton.style.display = 'block'; // 显示按钮
+            downloadButton.style.display = 'block';
             downloadButton.onclick = function () {
-                window.location.href = `/download-csv/${data.csvPath}`; // 设置按钮的点击行为
+                window.location.href = `/download-csv/${data.csvPath}`;
+            };
+
+            const fullDownloadButton = document.getElementById('fullDownloadButton');
+            fullDownloadButton.style.display = 'block';
+            fullDownloadButton.onclick = function () {
+                window.location.href = `/download-csv/${data.fullPath}`;
             };
         })
         .catch(error => {

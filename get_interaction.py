@@ -255,13 +255,15 @@ class Interaction:
         ]
 
         # Define the CSV output file name
-        csv_file_name = f"analysis_result/interactions_{chain}.csv"
-        with open(csv_file_name, "w", newline="") as csvfile:
+        csv_file_name = f"interactions_{chain}.csv"
+        csv_path = os.path.join("analysis_result", csv_file_name)
+        with open(csv_path, "w", newline="") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(rows)
 
         # print(f"Data written to {csv_file_name}")
+        return csv_file_name
 
     def n_interaction_count(self, chain, n, method):
         """

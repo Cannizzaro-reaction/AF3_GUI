@@ -253,6 +253,7 @@ def get_count():
     interaction = Interaction(json_path=filepath1, pdb_path=pdb_filepath2)
     # get file: PAE_b-factor.csv
     interaction.write_interactions_to_csv()
+    full_path = interaction.interaction_count(chain)
     df, csv_path = interaction.n_interaction_count(chain, n, method)
     df = format_decimals(df)
     # print(df)
@@ -265,7 +266,12 @@ def get_count():
 
     # print(result)
     return jsonify(
-        {"data": result, "csvPath": csv_filename, "message": "Data processed"}
+        {
+            "data": result,
+            "csvPath": csv_filename,
+            "fullPath": full_path,
+            "message": "Data processed",
+        }
     )
 
 
