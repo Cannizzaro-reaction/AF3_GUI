@@ -10,7 +10,39 @@
 
 <body>
     <div class="sidebar">
-        <p>Sidebar content</p>
+        <t>
+            Tool Introduction
+        </t>
+        <p>
+            Alpha Find is a tool to help you analyze the raw file got from Alpha Fold 3 server.<br><br>
+            If you are doing research on the interactions between two proteins and want to find the key residues
+            involved in the interactions, this GUI can be of great help.<br><br>
+            After uploading the raw files (which include a .json format file and a .cif format file) you got from Alpha
+            Fold 3 server,
+            you can get the statistics about the interactions with highest contact probability,
+            the residues (in the chain you choose) with the highest total contact probability or the most interactions
+            between two protein chains,
+            the visualization of the interactions on the protein chains,
+            and search your residues of interest.<br><br>
+            These statistics can help you decide the residues you're going to mutate first in the next stage of
+            experiment.<br>
+        </p>
+        <t>
+            Instruction
+        </t>
+        <p>
+            After typing in the sequence of the proteins you're researching on, the Alpha Fold 3 server will give back
+            the result in a .zip file.
+            After unpacking, you'll get five .json files end up with `full_data_` followed by a number and five .cif
+            files end up with `model_` followed by a number.
+            These are the results given by five different models.<br><br>
+            Choose one .json and one .cif for your analysis and make sure their ending numbers are the same.
+            Upload the two files according to the hints in the green box.<br><br>
+            If you've used this tool before, REMEMBER to clear the previous upload and results BEFORE A NEW TRY.<br><br>
+            Once the files have been successfully submitted, you can choose a way to analyze from the four choice given
+            in the box.<br><br>
+            `Return to upload page` if you want to change the files you've submitted.<br>
+        </p>
     </div>
     <div class="main-content">
         <h1>Alpha Find</h1>

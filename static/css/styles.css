@@ -24,6 +24,8 @@ body {
     top: 0;
     left: 0;
     box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .main-content {
@@ -183,4 +185,28 @@ input[type="submit"]:hover {
 .transparent-box button:hover {
     background-color: #435e3a;
     color: white;
+}
+
+p {
+    color: #435e3a;
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 95%;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+t {
+    color: #435e3a;
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 98%;
+    margin-right: 5px;
+    margin-left: 10px;
+
 }

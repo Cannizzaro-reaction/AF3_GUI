@@ -10,7 +10,31 @@
 
 <body>
     <div class="sidebar">
-        <p>Sidebar content</p>
+        <t>
+            Function 1: Find residue pairs with the highest contact probability
+        </t>
+        <p>
+            In this page, you will get the top n residue pairs between the two protein chains with the highest contact
+            probability.<br><br>
+            `Residue_1` and `Residue_2` columns show the No. of residues on each chain.<br>
+            `PAE` means Predicted Aligned Error, which is used to quantify the confidence of the model's prediction of
+            the relative positions between different residue (amino acid) pairs.<br>
+            `Average_PAE_1/2` shows the average PAE value of each residue towards other residues, which can be used to
+            determine whether the relative position of this residue is reliable in the predicted model.<br>
+            `Average_B_factor_1/2` shows the average stability of all the atoms in this residue.<br>
+            These information can be used as auxiliary information when choosing the mutation point.<br><br>
+        </p>
+        <t>
+            Instruction
+        </t>
+        <p>
+            `Choose a number between 3 and 20`: the number of residue pairs shown (Please note that if the corresponding
+            value of the last residue pair is the same as the following one(s), these pairs will be shown
+            together).<br><br>
+            After choosing n, click `confirm` and wait for the result in the table below.<br><br>
+            Both the result shown on the screen and the full statistics of all the interactions between the two chains
+            can be saved in .csv format.<br>
+        </p>
     </div>
     <div class="main-content">
         <h1>Alpha Find</h1>
