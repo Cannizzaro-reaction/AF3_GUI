@@ -165,12 +165,7 @@ These statistics can help you decide the residues you're going to mutate first i
   And install the following packages in command lines:
 
   ```shell
-  pip install biopython==1.83
-  pip install numpy==1.26.4
-  pip install pandas==2.2.2
-  pip install matplotlib==3.9.1.post1
-  pip install DateTime==5.5
-  pip install Flask=3.0.3
+  pip install biopython==1.83 numpy==1.26.4 pandas==2.2.2 matplotlib==3.9.1.post1 DateTime==5.5 Flask==3.0.3
   ```
 
 
