@@ -1,14 +1,15 @@
 <div align="center">
-    <p>
-    <a href="https://github.com/Cannizzaro-reaction/AF3_GUI"><img alt="Github Repository" src="https://img.shields.io/badge/Github-Repository-blue?logo=github&logoColor=blue"></a>
-    <a href="https://github.com/Cannizzaro-reaction/AF3_GUI?tab=MIT-1-ov-file"><img alt="mit" src="https://img.shields.io/badge/License-MIT-red.svg"></a>
-    </p>
-    <p>
-    <a href="https://github.com/Cannizzaro-reaction"><strong>Cannizzaro-reaction</strong></a>
+<p>
+<a href="https://github.com/Cannizzaro-reaction/AF3_GUI"><img alt="Github Repository" src="https://img.shields.io/badge/Github-Repository-blue?logo=github&logoColor=blue"></a>
+<a href="https://github.com/Cannizzaro-reaction/AF3_GUI?tab=MIT-1-ov-file"><img alt="mit" src="https://img.shields.io/badge/License-MIT-red.svg"></a>
+</p>
+<p>
+<a href="https://github.com/Cannizzaro-reaction"><strong>Cannizzaro-reaction</strong></a>
     &nbsp;
-    </p>
-    <b>A tool to analyze the raw data from AlphaFold3 server and visualize the interactions between two protein chains, designed for our 44th prp project in SJTU</b>
-    <p>
+</p>
+<b>A tool to analyze the raw data from AlphaFold3 server and visualize the interactions between two protein chains, designed for our 44th prp project in SJTU</b>
+<p>
+
 
 
 
