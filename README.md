@@ -9,6 +9,7 @@
 </p>
 <b>A tool to analyze the raw data from AlphaFold3 server and visualize the interactions between two protein chains, designed for our 44th prp project in SJTU</b>
 <p>
+</div>
 
 
 
