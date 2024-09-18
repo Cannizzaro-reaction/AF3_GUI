@@ -181,3 +181,8 @@ These statistics can help you decide the residues you're going to mutate first i
 
   Type in `http://127.0.0.1:5000` in your web browser, and you'll see the GUI.
 
+
+
+* The files in `test` directory can be used in a test run. `fold_2024_08_21_22_02_full_data_0.json` and `fold_2024_08_21_22_02_model_0.cif` can be taken from [AlphaFold3 Server](https://alphafoldserver.com/) by typing in the protein sequence in `sequence.txt`. 
+
+  > Reference: [Abramson, J., Adler, J., Dunger, J. *et al.* Accurate structure prediction of biomolecular interactions with AlphaFold 3. *Nature* **630**, 493–500 (2024).](https://www.nature.com/articles/s41586-024-07487-w)
